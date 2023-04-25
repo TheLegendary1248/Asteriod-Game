@@ -14,9 +14,6 @@ public class CameraPanner : MonoBehaviour
         }
         focus += new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * Time.deltaTime * speed;
         Camera.main.orthographicSize -= Input.mouseScrollDelta.y * (Camera.main.orthographicSize / 30);
-    }
-    private void FixedUpdate()
-    {
         transform.position = Vector3.Lerp(transform.position, (Vector3)focus + Vector3.back, lerp);
     }
     public static Vector2 MousePos()
