@@ -99,8 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 678f2b4d34d16b6419af76057c4e4dfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: 6
-  range: 2
+  points: 15
+  nodeRange: 1
+  range: {x: 2, y: 3}
   col: {fileID: 4042681290109159481}
   mFil: {fileID: 4802964847455086374}
 --- !u!23 &-4993162151742305005
