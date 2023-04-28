@@ -2,8 +2,8 @@ using UnityEngine;
 using UnityEditor;
 public class PolygonFill : MonoBehaviour
 {
-    public PolygonCollider2D col;
-    public MeshFilter mFil;
+    public PolygonCollider2D polyCollider;
+    public MeshFilter meshFilter;
     public LineRenderer outline;
 
     // Start is called before the first frame update
@@ -11,13 +11,13 @@ public class PolygonFill : MonoBehaviour
     {
 
         //Generate mesh
-        Mesh colMesh = col.CreateMesh(false, false);
+        Mesh colMesh = polyCollider.CreateMesh(false, false);
         //Fix Mesh UV
         colMesh.uv = System.Array.ConvertAll(colMesh.vertices, i => (Vector2)i);
-        mFil.mesh = colMesh;
+        meshFilter.mesh = colMesh;
         //Setup outline
-        outline.positionCount = col.points.Length;
-        outline.SetPositions(System.Array.ConvertAll(col.points, i => (Vector3)i));
+        outline.positionCount = polyCollider.points.Length;
+        outline.SetPositions(System.Array.ConvertAll(polyCollider.points, i => (Vector3)i));
     }
     
     // Update is called once per frame
