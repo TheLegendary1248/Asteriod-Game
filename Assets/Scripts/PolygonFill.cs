@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEditor;
-public class AsteriodScript : MonoBehaviour
+public class PolygonFill : MonoBehaviour
 {
     public PolygonCollider2D col;
     public MeshFilter mFil;
