@@ -8,6 +8,7 @@ public class AsteriodScript : MonoBehaviour
     public PolygonCollider2D col;
     public MeshFilter mFil;
     Vector2[] nodes;
+    public LineRenderer outline;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +48,9 @@ public class AsteriodScript : MonoBehaviour
         //Fix Mesh UV
         colMesh.uv = System.Array.ConvertAll(colMesh.vertices, i => (Vector2)i);
         mFil.mesh = colMesh;
+        //Setup outline
+        outline.positionCount = colliderPoints.Length;
+        outline.SetPositions(System.Array.ConvertAll(colliderPoints, i => (Vector3)i));
     }
     //Script to split the asteroid with enough damage or whatever other condition
     void Fracture()
