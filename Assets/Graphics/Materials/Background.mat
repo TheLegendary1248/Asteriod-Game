@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Debug
-  m_Shader: {fileID: -6465566751694194690, guid: 0f6b8274ef0e8f44499eb20d70263c0c, type: 3}
+  m_Name: Background
+  m_Shader: {fileID: 4800000, guid: 83c90a9700704144eb918cd2a1b879af, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -79,4 +79,5 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Scale: {r: 2, g: 2, b: 1, a: 1}
   m_BuildTextureStacks: []
