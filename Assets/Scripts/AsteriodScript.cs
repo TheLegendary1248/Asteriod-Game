@@ -60,6 +60,21 @@ public class AsteriodScript : MonoBehaviour
         if (tooSmall) { } //Simply delete if it's too small to fracture again
         else { } //Fracture code
     }
+    //Splits the asteroid along the given ray
+    void Split(Ray r)
+    {
+
+    }
+    //Modifies the shape of the asteroid
+    void Dent()
+    {
+          
+    }
+    
+    void Crack(Vector2 center, Ray[] along)
+    {
+
+    }
     // Update is called once per frame
     void Update()
     {
