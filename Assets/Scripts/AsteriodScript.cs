@@ -44,6 +44,8 @@ public class AsteriodScript : MonoBehaviour
 
         //Generate mesh
         Mesh colMesh = col.CreateMesh(false, false);
+        //Fix Mesh UV
+        colMesh.uv = System.Array.ConvertAll(colMesh.vertices, i => (Vector2)i);
         mFil.mesh = colMesh;
     }
     //Script to split the asteroid with enough damage or whatever other condition
