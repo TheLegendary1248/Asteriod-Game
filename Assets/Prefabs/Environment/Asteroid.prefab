@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4042681290109159478}
   - component: {fileID: 4042681290109159481}
   - component: {fileID: 4042681290109159479}
+  - component: {fileID: 5874903696460581999}
   - component: {fileID: -1605964854639994779}
   - component: {fileID: -4993162151742305005}
   - component: {fileID: 4802964847455086374}
@@ -88,6 +89,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5874903696460581999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4042681290109159480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c788a7811044c49a39004cb9575dfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col: {fileID: 4042681290109159481}
+  points: 16
+  nodeRange: 2
+  range: {x: 2, y: 2.5}
 --- !u!114 &-1605964854639994779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,9 +117,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 678f2b4d34d16b6419af76057c4e4dfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: 15
-  nodeRange: 1
-  range: {x: 2, y: 3}
   col: {fileID: 4042681290109159481}
   mFil: {fileID: 4802964847455086374}
   outline: {fileID: 4196177825777271659}
