@@ -8,26 +8,34 @@ public class ControllableShip : MonoBehaviour
     public float speed;
     public Rigidbody2D rb;
     public ParentConstraint constraint;
+    public Vector2 acceleration;
+    public int pointCt = 60;
+    [Header("Trajectory Test Vars")] 
+    LineRenderer lineRenderer;
     // Start is called before the first frame update
     void Start()
     {
-        
+        TestTrajectoryStart();
+    }
+    public void FixedUpdate()
+    {
+        rb.AddForce(acceleration);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             constraint.constraintActive = false;
-            Vector2 toMouseNormal = -((Vector2)transform.position - CameraPanner.MousePos()).normalized;
-            rb.velocity = toMouseNormal * speed;
+            acceleration = (-rb.position + CameraPanner.MousePos()) / 10f;
         }
+        TestTrajectoryUpdate();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //Snap ship to asteriod
-        if(!constraint.constraintActive)
+        if (!constraint.constraintActive)
         {
             ConstraintSource src = new ConstraintSource();
             src.weight = 1f;
@@ -35,8 +43,23 @@ public class ControllableShip : MonoBehaviour
             constraint.SetSource(0, src);
             constraint.constraintActive = true;
             constraint.SetTranslationOffset(0, collision.transform.InverseTransformPoint(transform.position));
+            rb.velocity = rb.velocity.magnitude * collision.GetContact(0).normal; 
         }
+
+    }
+    void TestTrajectoryStart()
+    {
+        lineRenderer = GetComponent<LineRenderer>();
         
     }
-    
+    void TestTrajectoryUpdate()
+    {
+        lineRenderer.positionCount = pointCt;
+        Vector2 localAccel = (-rb.position + CameraPanner.MousePos()) / 10f;
+        lineRenderer.SetPositions(
+            System.Array.ConvertAll(
+                Utils.Math.AcceleratedVelocityPlot(new Ray2D(rb.position, rb.velocity), localAccel, pointCt, Time.fixedDeltaTime), 
+                x => (Vector3)x
+            ));
+    }
 }
