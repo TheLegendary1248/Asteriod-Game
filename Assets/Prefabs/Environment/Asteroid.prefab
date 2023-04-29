@@ -102,9 +102,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   col: {fileID: 4042681290109159481}
-  points: 16
+  points: 20
   nodeRange: 2
-  range: {x: 2, y: 2.5}
+  range:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0041656494
+      value: 2
+      inSlope: 4.1131434
+      outSlope: 4.1131434
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.07491036
+    - serializedVersion: 3
+      time: 1
+      value: 3
+      inSlope: 4.970543
+      outSlope: 4.970543
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.05547826
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  scaleCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.5
+      inSlope: 1.3734736
+      outSlope: 1.3734736
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.14166667
+    - serializedVersion: 3
+      time: 0.9958191
+      value: 2
+      inSlope: 5.7335787
+      outSlope: 5.7335787
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.033459004
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &-1605964854639994779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,8 +308,8 @@ LineRenderer:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 0
-    numCapVertices: 3
+    numCornerVertices: 3
+    numCapVertices: 0
     alignment: 0
     textureMode: 0
     shadowBias: 0.5

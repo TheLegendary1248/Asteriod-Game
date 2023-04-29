@@ -4,6 +4,7 @@ public class PolygonFill : MonoBehaviour
 {
     public PolygonCollider2D polyCollider;
     public MeshFilter meshFilter;
+    public MeshRenderer meshRenderer;
     public LineRenderer outline;
 
     // Start is called before the first frame update
@@ -18,6 +19,8 @@ public class PolygonFill : MonoBehaviour
         //Setup outline
         outline.positionCount = polyCollider.points.Length;
         outline.SetPositions(System.Array.ConvertAll(polyCollider.points, i => (Vector3)i));
+        //Rand shader origin
+        
     }
     
     // Update is called once per frame

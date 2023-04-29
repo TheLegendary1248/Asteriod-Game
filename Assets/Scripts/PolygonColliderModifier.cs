@@ -20,7 +20,7 @@ public static class PolygonColliderModifier
         int startPoint = ClosestLine(collider.points, r.origin);
         int endPoint = ClosestLine(collider.points, Vector2.zero);
         //Get line closest to split exit point
-
+        
         //Generate half
 
         //Generate fragment other half
