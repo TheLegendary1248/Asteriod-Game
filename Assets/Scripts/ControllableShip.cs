@@ -19,7 +19,11 @@ public class ControllableShip : MonoBehaviour
     }
     public void FixedUpdate()
     {
-        rb.AddForce(acceleration);
+        if(!constraint.constraintActive)
+        {
+            transform.up = acceleration;
+        }
+        rb.AddForce(acceleration * rb.mass);
     }
 
     // Update is called once per frame
@@ -28,7 +32,7 @@ public class ControllableShip : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             constraint.constraintActive = false;
-            acceleration = (-rb.position + CameraPanner.MousePos()) / 10f;
+            acceleration = (-rb.position + CameraPanner.MousePos());
         }
         TestTrajectoryUpdate();
     }
@@ -43,7 +47,9 @@ public class ControllableShip : MonoBehaviour
             constraint.SetSource(0, src);
             constraint.constraintActive = true;
             constraint.SetTranslationOffset(0, collision.transform.InverseTransformPoint(transform.position));
-            rb.velocity = rb.velocity.magnitude * collision.GetContact(0).normal; 
+            Vector2 contactNormal = collision.GetContact(0).normal;
+            rb.velocity = rb.velocity.magnitude * contactNormal;
+            transform.up = contactNormal;
         }
 
     }
@@ -55,7 +61,7 @@ public class ControllableShip : MonoBehaviour
     void TestTrajectoryUpdate()
     {
         lineRenderer.positionCount = pointCt;
-        Vector2 localAccel = (-rb.position + CameraPanner.MousePos()) / 10f;
+        Vector2 localAccel = (-rb.position + CameraPanner.MousePos());
         lineRenderer.SetPositions(
             System.Array.ConvertAll(
                 Utils.Math.AcceleratedVelocityPlot(new Ray2D(rb.position, rb.velocity), localAccel, pointCt, Time.fixedDeltaTime), 
