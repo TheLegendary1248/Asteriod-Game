@@ -1,0 +1,77 @@
+<style type="text/css">
+    *{
+        box-sizing: border-box;
+        transition: all var(--trans-time);
+    }
+    :root{
+        --trans-time: 0.5s;
+    }
+    #container {
+        width: 300px;
+        height: 500px;
+        background-color: #999;
+    }
+    #title {
+        text-align: center;
+        position: relative;
+        width: 100%;
+        display: inline-block;
+    }
+    #graphic 
+    {
+        border-color: orange;
+        background-color: orange;
+        margin: 10px;
+        height: calc(80% - 25px);
+        width: calc(100% - 20px);
+    }
+    #container:hover #graphic{
+        height: calc(40% - 25px);
+    }
+    #info
+    {
+        position: relative;
+        border-color: aqua;
+        margin: 10px;
+        height: calc(20% - 25px);
+        width: calc(100% - 20px);
+    }
+    #container:hover #info{
+        height: calc(60% - 25px);
+    }
+    #info div{
+        border: none;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+    #stats {
+        background-color: aqua;
+    }
+    #description
+    {
+        background-color: violet;
+        opacity: 0;
+    }
+    #container:hover #stats{
+        opacity: 0;
+    }
+    #container:hover #description{
+        opacity: 1;
+    }
+    div {border: 2px black solid;}
+</style>
+<div id="container" >
+    <span id="title">Card Title</span>
+    <div id="graphic">
+        <span>Graphic</span>
+    </div>
+    <div id="info">
+        <div id="stats">
+            <span>Stats</span>
+        </div>
+        <div id="description">
+            <span>Description. This Animation can be optional if it's too much to ask for</span>
+        </div>
+    </div>
+</div>
