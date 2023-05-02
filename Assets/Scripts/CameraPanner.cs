@@ -12,9 +12,9 @@ public class CameraPanner : MonoBehaviour
         {
             focus = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
-        focus += new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * Time.deltaTime * speed;
+        focus += new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * Time.unscaledDeltaTime * speed;
         Camera.main.orthographicSize -= Input.mouseScrollDelta.y * (Camera.main.orthographicSize / 30);
-        transform.position = Vector3.Lerp(transform.position, (Vector3)focus + Vector3.back, lerp);
+        transform.position = Vector3.Lerp(transform.position, (Vector3)focus + Vector3.back, lerp * Time.unscaledDeltaTime);
     }
     public static Vector2 MousePos()
     {
