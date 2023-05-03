@@ -5,12 +5,15 @@ using UnityEngine.Animations;
 
 public class ControllableShip : MonoBehaviour
 {
-    public float speed;
     public Rigidbody2D rb;
     public ParentConstraint constraint;
+    [Tooltip("The acceleration of the ship relative to itself")]
     public Vector2 acceleration;
-    public int pointCt = 60;
+    
+    public Vector2 mountSpeed;
+    public float launchSpeedCap;
     [Header("Trajectory Test Vars")] 
+    public int pointCt = 60;
     LineRenderer lineRenderer;
     // Start is called before the first frame update
     void Start()
@@ -33,6 +36,16 @@ public class ControllableShip : MonoBehaviour
         {
             constraint.constraintActive = false;
             acceleration = (-rb.position + CameraPanner.MousePos());
+
+            Vector2 localAccel = (-rb.position + CameraPanner.MousePos());
+            Vector3[] plot = System.Array.ConvertAll(
+                Utils.Math.AcceleratedVelocityPlot(rb.position, rb.velocity, localAccel, pointCt / 4, Time.fixedDeltaTime * 4f),
+                x => (Vector3)x);
+
+            for (int i = 0; i < plot.Length - 1; i++)
+            {
+                Debug.DrawLine(plot[i], plot[i + 1], Color.yellow, 2f);
+            }
         }
         TestTrajectoryUpdate();
     }
@@ -49,9 +62,8 @@ public class ControllableShip : MonoBehaviour
             constraint.SetTranslationOffset(0, collision.transform.InverseTransformPoint(transform.position));
             Vector2 contactNormal = collision.GetContact(0).normal;
             rb.velocity = rb.velocity.magnitude * contactNormal;
-            transform.up = contactNormal;
+            transform.right = contactNormal;
         }
-
     }
     void TestTrajectoryStart()
     {
@@ -62,10 +74,13 @@ public class ControllableShip : MonoBehaviour
     {
         lineRenderer.positionCount = pointCt;
         Vector2 localAccel = (-rb.position + CameraPanner.MousePos());
-        lineRenderer.SetPositions(
-            System.Array.ConvertAll(
-                Utils.Math.AcceleratedVelocityPlot(new Ray2D(rb.position, rb.velocity), localAccel, pointCt, Time.fixedDeltaTime), 
-                x => (Vector3)x
-            ));
+        Vector3[] plot = System.Array.ConvertAll(
+            Utils.Math.AcceleratedVelocityPlot(rb.position, rb.velocity, localAccel, pointCt, Time.fixedDeltaTime),
+            x => (Vector3)x);
+        lineRenderer.SetPositions(plot);
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(transform.position, transform.position + (Vector3)acceleration);
     }
 }

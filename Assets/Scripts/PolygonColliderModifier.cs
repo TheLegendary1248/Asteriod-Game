@@ -9,8 +9,13 @@ public static class PolygonColliderModifier
     {
         throw new System.NotImplementedException();
         bool tooSmall = false;
-        if (tooSmall) { } //Simply delete if it's too small to fracture again
+        if (tooSmall) 
+        {
+            //Simply delete if it's too small to fracture again
+            //Before you do that though, think about what conditions is "too small". I think Polg
+        } 
         else { } //Fracture code
+        
     }
     //Splits the asteroid along the given ray
     public static void Split(this PolygonFill self, Ray r)
