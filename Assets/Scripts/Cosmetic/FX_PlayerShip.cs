@@ -21,8 +21,4 @@ public class FX_PlayerShip : MonoBehaviour
         
         
     }
-    private void Start()
-    {
-        
-    }
 }
