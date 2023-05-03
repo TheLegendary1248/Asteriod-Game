@@ -7,6 +7,8 @@ public class ControllableShip : MonoBehaviour
 {
     public Rigidbody2D rb;
     public ParentConstraint constraint;
+    public float accelerationTime;
+    Coroutine timer;
     [Tooltip("The acceleration of the ship relative to itself")]
     public Vector2 acceleration;
     
@@ -28,26 +30,24 @@ public class ControllableShip : MonoBehaviour
         }
         rb.AddForce(acceleration * rb.mass);
     }
-
-    // Update is called once per frame
-    void Update()
+    IEnumerable AccelerationTime()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        yield return new WaitForSeconds(accelerationTime);
+    }
+    void LaunchOffSurface(Vector2 cursor)
+    {
+        constraint.constraintActive = false;
+        acceleration = (-rb.position + CameraPanner.MousePos());
+
+        Vector2 localAccel = (-rb.position + CameraPanner.MousePos());
+        Vector3[] plot = System.Array.ConvertAll(
+            Utils.Math.AcceleratedVelocityPlot(rb.position, rb.velocity, localAccel, pointCt / 4, Time.fixedDeltaTime * 4f),
+            x => (Vector3)x);
+
+        for (int i = 0; i < plot.Length - 1; i++)
         {
-            constraint.constraintActive = false;
-            acceleration = (-rb.position + CameraPanner.MousePos());
-
-            Vector2 localAccel = (-rb.position + CameraPanner.MousePos());
-            Vector3[] plot = System.Array.ConvertAll(
-                Utils.Math.AcceleratedVelocityPlot(rb.position, rb.velocity, localAccel, pointCt / 4, Time.fixedDeltaTime * 4f),
-                x => (Vector3)x);
-
-            for (int i = 0; i < plot.Length - 1; i++)
-            {
-                Debug.DrawLine(plot[i], plot[i + 1], Color.yellow, 2f);
-            }
+            Debug.DrawLine(plot[i], plot[i + 1], Color.yellow, 2f);
         }
-        TestTrajectoryUpdate();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
