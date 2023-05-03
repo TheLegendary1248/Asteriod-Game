@@ -34,10 +34,17 @@ public class ControllableShip : MonoBehaviour
     {
         yield return new WaitForSeconds(accelerationTime);
     }
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            LaunchOffSurface(CameraPanner.MousePos());
+        }
+    }
     void LaunchOffSurface(Vector2 cursor)
     {
         constraint.constraintActive = false;
-        acceleration = (-rb.position + CameraPanner.MousePos());
+        acceleration = -rb.position + cursor;
 
         Vector2 localAccel = (-rb.position + CameraPanner.MousePos());
         Vector3[] plot = System.Array.ConvertAll(

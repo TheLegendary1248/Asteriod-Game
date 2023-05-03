@@ -1,11 +1,29 @@
 using UnityEngine;
 using UnityEditor;
-public class PolygonFill : MonoBehaviour
+using System;
+
+public class PolygonFill : MonoBehaviour, IPlotable
 {
     public PolygonCollider2D polyCollider;
     public MeshFilter meshFilter;
     public MeshRenderer meshRenderer;
     public LineRenderer outline;
+
+    public Vector3[] Outline()
+    {
+        Vector3[] line = new Vector3[outline.positionCount];
+        outline.GetPositions(line);
+        return line;
+    }
+
+    public Func<float, Vector2> PredictPath()
+    {
+        return (float time) => polyCollider.attachedRigidbody.position + (polyCollider.attachedRigidbody.velocity * time);
+    }
+    public Func<float, Quaternion> PredictRotation()
+    {
+        return (float time) => polyCollider.transform.rotation * Quaternion.Euler(0, 0, polyCollider.attachedRigidbody.angularVelocity * time);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -22,11 +40,6 @@ public class PolygonFill : MonoBehaviour
         //Rand shader origin
         
     }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
     
 }
